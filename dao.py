@@ -45,6 +45,13 @@ class UsuarioDao(pessoaDao):
         conexao = conectar()
         cursor =  conexao.cursor()
         try:
+            cursor.execute(
+                """
+                select id from dbo.Pessoa where email = ?                
+""",(Pessoa.email)
+            )
+
+
             cursor.execute("""
                 INSERT INTO Usuario (pessoa_id, login, senha_hash)
                 VALUES (?, ?, ?)
