@@ -20,7 +20,7 @@ class pessoaDao:
             cursor.close()
             conexao.close()
     @classmethod
-    def apagar(cls, pessoa : Pessoa):
+    def apagar(cls, email : str):
         conexao = conectar()
         cursor =  conexao.cursor()
         try :
@@ -28,7 +28,7 @@ class pessoaDao:
                 """
             DELETE FROM dbo.Pessoa where email = ? 
             """,
-            (pessoa.email)
+            (email,)
             )
             conexao.commit()
         except Exception as erro:
@@ -65,7 +65,7 @@ class usuarioDao(pessoaDao):
             cursor.close()
             conexao.close()    
     @classmethod
-    def apagar(cls, usuario : Usuario):
+    def apagar(cls, login : str):
         conexao = conectar()
         cursor =  conexao.cursor()
         try :
@@ -73,7 +73,7 @@ class usuarioDao(pessoaDao):
                 """
             DELETE FROM dbo.Usuario where login = ? 
             """,
-            (usuario.login)
+            (login,)
             )
             conexao.commit()
         except Exception as erro:
@@ -84,7 +84,4 @@ class usuarioDao(pessoaDao):
             cursor.close()
 
 
-a = Pessoa('marcos','marcos@')
-b = Usuario(a,'marcos','Marcos.12341')
-pessoaDao.cadastrar(a)
-usuarioDao.cadastrar(b)
+pessoaDao.apagar('juca@')
