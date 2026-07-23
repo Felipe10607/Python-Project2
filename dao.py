@@ -7,12 +7,11 @@ class pessoaDao:
         cursor = conexao.cursor()
         try:
             cursor.execute("""
-                INSERT INTO Usuario (pessoa_id, login, senha_hash)
+                INSERT INTO Usuario (nome,email)
                 VALUES (?, ?, ?)
             """, (
-                pessoa.pessoa_id,
-                pessoa.login,
-                pessoa.senha_hash.decode("utf-8")
+                pessoa.nome,
+                pessoa.email,
             ))
 
             conexao.commit()
@@ -47,16 +46,15 @@ class UsuarioDao(pessoaDao):
         try:
             cursor.execute(
                 """
-                select id from dbo.Pessoa where email = ?                
-""",(Pessoa.email)
+                select id from dbo.Pessoa where email = ?""",(Pessoa.email)
             )
-
+            resultado = cursor.fetchone()
 
             cursor.execute("""
                 INSERT INTO Usuario (pessoa_id, login, senha_hash)
                 VALUES (?, ?, ?)
             """, (
-                usuario.pessoa_id,
+                resultado,
                 usuario.login,
                 usuario.senha_hash.decode("utf-8")
             ))
@@ -73,9 +71,9 @@ class UsuarioDao(pessoaDao):
         try :
             cursor.execute(
                 """
-            DELETE FROM dbo.Pessoa where email = ? 
+            DELETE FROM dbo.Usuario where login = ? 
             """,
-            (pessoa.email)
+            (usuario.login)
             )
             conexao.commit()
         except Exception as erro:
@@ -84,3 +82,8 @@ class UsuarioDao(pessoaDao):
 
         finally:
             cursor.close()
+
+
+a = Pessoa('Felipe','felipe@')
+pessoaDao()
+pessoaDao.cadastrar(a)
