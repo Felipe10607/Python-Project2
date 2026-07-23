@@ -46,15 +46,15 @@ class usuarioDao(pessoaDao):
         try:
             cursor.execute(
                 """
-                select id from dbo.Pessoa where email = ?""",(Pessoa.email)
+                select id from dbo.Pessoa where email = ?""",(usuario.pessoa.email,)
             )
             resultado = cursor.fetchone()
 
             cursor.execute("""
-                INSERT INTO Usuario (pessoa_id, login, senha_hash)
+                INSERT INTO dbo.Usuario (pessoa_id, login, senha_hash)
                 VALUES (?, ?, ?)
             """, (
-                resultado,
+                resultado[0],
                 usuario.login,
                 usuario.senha_hash.decode("utf-8")
             ))
@@ -84,7 +84,7 @@ class usuarioDao(pessoaDao):
             cursor.close()
 
 
-a = Pessoa('Juca','juca@')
-b = Usuario(a,'jucas','123')
+a = Pessoa('marcos','marcos@')
+b = Usuario(a,'marcos','Marcos.12341')
 pessoaDao.cadastrar(a)
 usuarioDao.cadastrar(b)
