@@ -13,3 +13,7 @@ fazer o seguinte elaborar melhor a proposta de como vai ficar o banco de dados
 e mudar a model para fazer 1:n de pesssoa para usuário
 
 https://www.geeksforgeeks.org/python/hashing-passwords-in-python-with-bcrypt/
+
+
+falta fazer a verificação de login
+fazer esse step
