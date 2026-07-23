@@ -7,11 +7,11 @@ class pessoaDao:
         cursor = conexao.cursor()
         try:
             cursor.execute("""
-                INSERT INTO Usuario (nome,email)
-                VALUES (?, ?, ?)
+                INSERT INTO dbo.Pessoa (nome,email)
+                VALUES (?, ?)
             """, (
                 pessoa.nome,
-                pessoa.email,
+                pessoa.email
             ))
 
             conexao.commit()
@@ -86,4 +86,4 @@ class UsuarioDao(pessoaDao):
 
 a = Pessoa('Felipe','felipe@')
 pessoaDao()
-pessoaDao.cadastrar(a)
+pessoaDao.apagar(a)
