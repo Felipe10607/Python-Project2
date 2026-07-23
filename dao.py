@@ -38,7 +38,7 @@ class pessoaDao:
         finally:
             cursor.close()
 
-class UsuarioDao(pessoaDao):
+class usuarioDao(pessoaDao):
     @classmethod
     def cadastrar(cls, usuario : Usuario):
         conexao = conectar()
@@ -84,6 +84,7 @@ class UsuarioDao(pessoaDao):
             cursor.close()
 
 
-a = Pessoa('Felipe','felipe@')
-pessoaDao()
-pessoaDao.apagar(a)
+a = Pessoa('Juca','juca@')
+b = Usuario(a,'jucas','123')
+pessoaDao.cadastrar(a)
+usuarioDao.cadastrar(b)
