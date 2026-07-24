@@ -1,6 +1,5 @@
 import pyodbc
 
-
 def conectar():
     return pyodbc.connect(
         "DRIVER={ODBC Driver 18 for SQL Server};"
