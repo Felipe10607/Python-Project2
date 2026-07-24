@@ -83,23 +83,25 @@ class usuarioDao(pessoaDao):
         finally:
             cursor.close()
     @classmethod
-    def consultar(cls,login : str):
+    def consultar(cls,usuario : Usuario):
         conexao = conectar()
         cursor = conexao.cursor()
         try:
             cursor.execute(
                 """
                 select login,senha from dbo.Usuario where login = ?
-                """,(login,)
+                """,(usuario.login,)
             )
             conexao.commit()
             saida = cursor.fetchone()
-            if saida[0] == login:
-                senha = saida[1]
-                usuario = Usuario(login,senha)
+            if saida[0] == usuario.login:
                 Usuario.verificar_forca_senha(usuario.senha_hash)
         finally:
                     cursor.close()
                     conexao.close()
 
-pessoaDao.apagar('juca@')
+a = Pessoa('Felps','felps@')
+b = Usuario(a,'felps','Felps.1234')
+
+pessoaDao.cadastrar(a)
+usuarioDao.cadastrar(b)

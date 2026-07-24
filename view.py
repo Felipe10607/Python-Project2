@@ -2,7 +2,14 @@ from models import *
 from dao import *
 from Controller import *
 
+
+
 print('-----MENU------')
+print('REALIZAR O LOGIN')
+loginu = input("digite seu login")
+senhau = input("insira a senha")
+usuarioController.fazer_login(loginu,senhau)
+"""
 print('1. Criar o seu cadastro')
 print('2. Criar o seu usuário')
 print('3. Apagar cadastro')
@@ -23,4 +30,4 @@ while True:
         usuarioController.cadastra_usuario(email2,login,senha)
     if x == 6:
         break
-    
+"""

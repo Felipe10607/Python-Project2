@@ -17,4 +17,4 @@ class usuarioController:
     @staticmethod
     def fazer_login(login,senha):
         usuario = Usuario(login,senha)
-        
+        usuarioDao.consultar(usuario)
