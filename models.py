@@ -37,9 +37,9 @@ class Usuario:
         if not re.search(r'[!@#$%^&*(),.?":{}|<>]', senha):
             raise ValueError("A senha deve conter caractere especial.")
 
-    def conferir_senha(self, senha_digitada):
-            senhae = bcrypt.hashpw(
-                senha_digitada.encode("utf-8"),
-                bcrypt.gensalt()
-            )
-            return senhae
+    def conferir_senha(self, senha_hash):
+        return bcrypt.checkpw(
+            self.senha.encode("utf-8"),
+            senha_hash.encode("utf-8")
+        )
+        

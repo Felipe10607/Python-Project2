@@ -92,10 +92,12 @@ class usuarioDao(pessoaDao):
                 select login,senha_hash from dbo.Usuario where login = ?
                 """,(usuario.login,)
             )
-            conexao.commit()
             resultado = cursor.fetchone()
-            login,senha = resultado
-            if login == usuario.login and Usuario.conferir_senha(usuario.senha_hash) == senha:
+            if resultado is None:
+                print("Usuário não encontrado.")
+                return
+            login,senha_hash = resultado
+            if login == usuario.login and usuario.conferir_senha(senha_hash):
                 print("LOGIN REALIZADO!")
             else:
                 print("Senha incorreta.")
