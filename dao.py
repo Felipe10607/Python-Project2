@@ -93,10 +93,12 @@ class usuarioDao(pessoaDao):
                 """,(usuario.login,)
             )
             conexao.commit()
-            login,senha = cursor.fetchone()
-            if login == usuario.login:
-                if Usuario.conferir_senha(usuario.senha_hash) == senha:
-                    print("LOGIN REALIZADO!")
+            resultado = cursor.fetchone()
+            login,senha = resultado
+            if login == usuario.login and Usuario.conferir_senha(usuario.senha_hash) == senha:
+                print("LOGIN REALIZADO!")
+            else:
+                print("Senha incorreta.")
         finally:
                     cursor.close()
                     conexao.close()
