@@ -12,13 +12,12 @@ class Usuario:
     def __init__(self, pessoa, login, senha):
         self.pessoa = pessoa
         self.login = login
-
-        self.verificar_forca_senha(senha)
-
-        self.senha_hash = bcrypt.hashpw(
-            senha.encode("utf-8"),
+        self.senha = senha
+    def gerar_hash(self):
+        return bcrypt.hashpw(
+            self.senha.encode("utf-8"),
             bcrypt.gensalt()
-        )
+        ).decode("utf-8")
 
     @staticmethod
     def verificar_forca_senha(senha):

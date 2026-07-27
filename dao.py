@@ -37,16 +37,36 @@ class pessoaDao:
 
         finally:
             cursor.close()
+    @classmethod
+    def consultar(cls, pessoa : Pessoa):
+        conexao = conectar()
+        cursor = conexao.cursor()
+        try:
+            cursor.execute("""
+                select id,email from dbo.Pessoa where email = ?
+            """, (
+                (pessoa.email,)
+            ))
+            resultado = cursor.fetchone()
+            if resultado is None:
+                print("Usuário não encontrado.")
+                return
+            id = resultado[0]
+        finally:
+            cursor.close()
+            conexao.close()
+        return True
 
 class usuarioDao(pessoaDao):
     @classmethod
     def cadastrar(cls, usuario : Usuario):
+        Usuario.verificar_forca_senha(usuario)
         conexao = conectar()
         cursor =  conexao.cursor()
         try:
             cursor.execute(
                 """
-                select id from dbo.Pessoa where email = ?""",(usuario.pessoa.email,)
+                select id from dbo.Pessoa where email = '?'""",(usuario.pessoa.email,)
             )
             resultado = cursor.fetchone()
 
