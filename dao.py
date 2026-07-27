@@ -60,23 +60,24 @@ class pessoaDao:
 class usuarioDao(pessoaDao):
     @classmethod
     def cadastrar(cls, usuario : Usuario):
-        Usuario.verificar_forca_senha(usuario)
+        Usuario.verificar_forca_senha(usuario.senha)
         conexao = conectar()
         cursor =  conexao.cursor()
         try:
             cursor.execute(
                 """
-                select id from dbo.Pessoa where email = '?'""",(usuario.pessoa.email,)
+                select id from dbo.Pessoa where email = ?
+                """,(usuario.pessoa.email,)
             )
             resultado = cursor.fetchone()
-
+            senha = Usuario.gerar_hash(usuario)
             cursor.execute("""
                 INSERT INTO dbo.Usuario (pessoa_id, login, senha_hash)
                 VALUES (?, ?, ?)
             """, (
                 resultado[0],
                 usuario.login,
-                usuario.senha_hash.decode("utf-8")
+                senha,
             ))
 
             conexao.commit()
@@ -117,13 +118,15 @@ class usuarioDao(pessoaDao):
                 print("Usuário não encontrado.")
                 return
             login,senha_hash = resultado
-            if login == usuario.login and usuario.conferir_senha(senha_hash):
-                print("LOGIN REALIZADO!")
-            else:
-                print("Senha incorreta.")
         finally:
                     cursor.close()
                     conexao.close()
+        if login == usuario.login and usuario.conferir_senha(senha_hash):
+                print("LOGIN REALIZADO!")
+                return True
+        else:
+                print("Senha incorreta.")
+                return False
 """
 a = Pessoa('Felps','felps@')
 b = Usuario(a,'felps','Felps.1234')

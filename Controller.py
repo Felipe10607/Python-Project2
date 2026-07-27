@@ -16,4 +16,4 @@ class usuarioController:
         usuarioDao.cadastrar(usuario)
     @staticmethod
     def fazer_login(usuario : Usuario):
-        usuarioDao.consultar(usuario)
+        return usuarioDao.consultar(usuario)
