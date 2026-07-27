@@ -5,10 +5,14 @@ from Controller import *
 
 
 print('-----MENU------')
+print('Entre no site')
+email = input('digite o seu gmail: ')
+a = Pessoa(None,email)
 print('REALIZAR O LOGIN')
-loginu = input("digite seu login")
-senhau = input("insira a senha")
-usuarioController.fazer_login(loginu,senhau)
+loginu = input("digite seu login: ")
+senhau = input("insira a senha: ")
+u = Usuario(a,loginu,senhau)
+usuarioController.fazer_login(u)
 """
 print('1. Criar o seu cadastro')
 print('2. Criar o seu usuário')

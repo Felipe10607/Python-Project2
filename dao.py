@@ -93,15 +93,17 @@ class usuarioDao(pessoaDao):
                 """,(usuario.login,)
             )
             conexao.commit()
-            saida = cursor.fetchone()
-            if saida[0] == usuario.login:
-                Usuario.verificar_forca_senha(usuario.senha_hash)
+            login,senha = cursor.fetchone()
+            if login == usuario.login:
+                if Usuario.conferir_senha(usuario.senha_hash) == senha:
+                    print("LOGIN REALIZADO!")
         finally:
                     cursor.close()
                     conexao.close()
-
+"""
 a = Pessoa('Felps','felps@')
 b = Usuario(a,'felps','Felps.1234')
 
 pessoaDao.cadastrar(a)
 usuarioDao.cadastrar(b)
+"""

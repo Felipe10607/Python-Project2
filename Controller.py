@@ -15,6 +15,6 @@ class usuarioController:
         usuario = Usuario(pessoa,login,senha)
         usuarioDao.cadastrar(usuario)
     @staticmethod
-    def fazer_login(login,senha):
-        usuario = Usuario(login,senha)
+    def fazer_login(usuario : Usuario):
+        senha = input("Insira a sua senha: ")
         usuarioDao.consultar(usuario)

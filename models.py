@@ -38,7 +38,8 @@ class Usuario:
             raise ValueError("A senha deve conter caractere especial.")
 
     def conferir_senha(self, senha_digitada):
-        return bcrypt.checkpw(
-            senha_digitada.encode("utf-8"),
-            self.senha_hash
-        )
+            senhae = bcrypt.hashpw(
+                senha_digitada.encode("utf-8"),
+                bcrypt.gensalt()
+            )
+            return senhae
