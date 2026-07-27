@@ -32,6 +32,9 @@ if pessoaDao.consultar(a) is True:
                 login = input("Digite o seu login :")
                 senha = input("Insira a senha :")
                 usuarioController.cadastra_usuario(email2,login,senha)
+            if x == 3:
+                demail = input("Digite o email para deletar: ")
+                pessoaController.deletar(demail)
             if x == 6:
                 break
     else:
