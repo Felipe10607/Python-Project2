@@ -89,7 +89,7 @@ class usuarioDao(pessoaDao):
         try:
             cursor.execute(
                 """
-                select login,senha from dbo.Usuario where login = ?
+                select login,senha_hash from dbo.Usuario where login = ?
                 """,(usuario.login,)
             )
             conexao.commit()
