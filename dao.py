@@ -128,7 +128,7 @@ class usuarioDao(pessoaDao):
                 print("Senha incorreta.")
                 return False
     @classmethod
-    def listar (cls, pessoa : Pessoa):
+    def listar (cls, email):
         conexao = conectar()
         cursor = conexao.cursor()
         try: 
@@ -140,7 +140,7 @@ class usuarioDao(pessoaDao):
                         SELECT p.id
                         FROM dbo.Pessoa AS p
                              WHERE p.email = ?
-                """,(pessoa.email,)
+                """,(email,)
               )
               resultado = cursor.fetchall()
               for i in resultado:

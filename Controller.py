@@ -23,5 +23,5 @@ class usuarioController:
     def deletar(login : str):
         usuarioDao.apagar(login)
     @staticmethod 
-    def listagem(usuario : Usuario):
-        usuarioDao.listar(usuario)
+    def listagem(email : str):
+        usuarioDao.listar(email)

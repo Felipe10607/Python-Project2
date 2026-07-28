@@ -39,7 +39,7 @@ if pessoaDao.consultar(a) is True:
                 dlogin = input("Digite o seu login para deletar :")
                 usuarioController.deletar(dlogin)
             if x == 5:
-                usuarioController.listagem(u)
+                usuarioController.listagem(a.email)
             if x == 6:
                 break
     else:
