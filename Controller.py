@@ -6,6 +6,7 @@ class pessoaController:
     def cadastra(nome,email):
         pessoa = Pessoa(nome,email)
         pessoaDao.cadastrar(pessoa)
+    @staticmethod
     def deletar(email):
         pessoa = Pessoa(None,email)
         pessoaDao.apagar(pessoa.email)
