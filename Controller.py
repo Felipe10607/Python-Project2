@@ -19,3 +19,9 @@ class usuarioController:
     @staticmethod
     def fazer_login(usuario : Usuario):
         return usuarioDao.consultar(usuario)
+    @staticmethod
+    def deletar(login : str):
+        usuarioDao.apagar(login)
+    @staticmethod 
+    def listagem(usuario : Usuario):
+        usuarioDao.listar(usuario)

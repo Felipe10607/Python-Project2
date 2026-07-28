@@ -127,6 +127,27 @@ class usuarioDao(pessoaDao):
         else:
                 print("Senha incorreta.")
                 return False
+    @classmethod
+    def listar (cls, pessoa : Pessoa):
+        conexao = conectar()
+        cursor = conexao.cursor()
+        try: 
+              cursor.execute(
+                """
+                   SELECT u.login
+                    FROM dbo.Usuario AS u
+                    WHERE u.pessoa_id = (
+                        SELECT p.id
+                        FROM dbo.Pessoa AS p
+                             WHERE p.email = ?
+                """,(pessoa.email,)
+              )
+              resultado = cursor.fetchall()
+              for i in resultado:
+                   print(i)
+        finally:
+                cursor.close()
+                conexao.close()
 """
 a = Pessoa('Felps','felps@')
 b = Usuario(a,'felps','Felps.1234')

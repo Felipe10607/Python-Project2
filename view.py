@@ -35,6 +35,11 @@ if pessoaDao.consultar(a) is True:
             if x == 3:
                 demail = input("Digite o email para deletar: ")
                 pessoaController.deletar(demail)
+            if x == 4:
+                dlogin = input("Digite o seu login para deletar :")
+                usuarioController.deletar(dlogin)
+            if x == 5:
+                usuarioController.listagem(u)
             if x == 6:
                 break
     else:
