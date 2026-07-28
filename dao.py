@@ -60,7 +60,12 @@ class pessoaDao:
 class usuarioDao(pessoaDao):
     @classmethod
     def cadastrar(cls, usuario : Usuario):
-        Usuario.verificar_forca_senha(usuario.senha)
+        try:
+            Usuario.verificar_forca_senha(usuario.senha)
+            print("Senha válida")
+        except ValueError as e:
+             print(f"Erro: {e}")
+             return
         conexao = conectar()
         cursor =  conexao.cursor()
         try:
