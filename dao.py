@@ -134,17 +134,12 @@ class usuarioDao(pessoaDao):
         try: 
               cursor.execute(
                 """
-                   SELECT u.login
-                    FROM dbo.Usuario AS u
-                    WHERE u.pessoa_id = (
-                        SELECT p.id
-                        FROM dbo.Pessoa AS p
-                             WHERE p.email = ?
+                select login from dbo.Usuario where pessoa_id = (select id from dbo.Pessoa where email = ?)
                 """,(email,)
               )
               resultado = cursor.fetchall()
               for i in resultado:
-                   print(i)
+                   print(i[0])
         finally:
                 cursor.close()
                 conexao.close()
