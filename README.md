@@ -75,7 +75,7 @@ O sistema utiliza duas tabelas relacionadas no banco `SistemaLogin`:
 - **re (regex)** — validação de força da senha
 - Programação Orientada a Objetos (POO)
 
-## 📁 Estrutura de arquivos
+##  Estrutura de arquivos
 
 ```
 Python-Project2/
